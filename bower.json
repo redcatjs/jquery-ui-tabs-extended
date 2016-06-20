@@ -1,0 +1,19 @@
+{
+  "name": "xtabs",
+  "main": "xtabs.js",
+  "homepage": "https://github.com/redcatphp/xtabs",
+  "authors": [
+    "jo <jo@surikat.pro>"
+  ],
+  "description": "Overlay for jquery-ui tabs",
+  "keywords": [
+    "tabs",
+    "jquery-ui",
+    "add",
+    "remove"
+  ],
+  "dependencies":{
+	"jquery-ui":"latest"
+  },
+  "license": "MIT"
+}
