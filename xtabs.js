@@ -112,7 +112,7 @@
 					}
 				});
 			},
-			writeTab: function(tabObj){
+			writeTab: function(tabObj,tmpTab){
 				tabCounter++;
 				var id = 'tabs-'+tabCounter;
 				var newLi = $( tabTemplate.replace( /#\{href\}/g, baseHref+'#'+id ).replace( /#\{title\}/g, tabObj.name));
@@ -123,7 +123,12 @@
 				
 				THIS.attachEventToLi(newLi);
 				
-				$this.find('>ul >li:last').before(newLi);
+				if(tmpTab){
+					tmpTab.replaceWith(newLi);
+				}
+				else{
+					$this.find('>ul >li:last').before(newLi);
+				}
 				$this.append(newDiv);
 				
 				if(config.tabContainerReady) config.tabContainerReady(newDiv);
@@ -142,7 +147,7 @@
 				
 				addingTab = false;
 			},
-			addTab: function(name,tabObj){
+			addTab: function(name,tabObj,tmpTab){
 				if(!tabObj){
 					tabObj = {
 						position	:	$this.find('>ul>li').length-1,
@@ -157,7 +162,7 @@
 							addTabReturn.then(function(result){
 								if(typeof(result)=='object')
 									$.extend(tabObj,result);
-								THIS.writeTab(tabObj);
+								THIS.writeTab(tabObj,tmpTab);
 							});
 						}
 						else{
@@ -165,14 +170,12 @@
 						}
 					}
 					else{
-						THIS.writeTab(tabObj);
+						THIS.writeTab(tabObj,tmpTab);
 					}
 				}
 				else{
-					THIS.writeTab(tabObj);
+					THIS.writeTab(tabObj,tmpTab);
 				}
-				
-				
 				
 			},
 			removeTab: function(panelId){
@@ -226,8 +229,7 @@
 							if(typeof(check)=='object'&&check.done){
 								check.done(function(isValid){
 									if(isValid){
-										newLi.remove();
-										THIS.addTab(val);
+										THIS.addTab(val,null,newLi);
 									}
 									else{
 										$(this).focus();
@@ -235,13 +237,11 @@
 								});
 							}
 							else if(check&&check===true){
-								newLi.remove();
-								THIS.addTab(val);
+								THIS.addTab(val,null,newLi);
 							}
 						}
 						else{
-							newLi.remove();
-							THIS.addTab(val);
+							THIS.addTab(val,null,newLi);
 						}
 					}
 				});
