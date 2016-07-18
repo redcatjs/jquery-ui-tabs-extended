@@ -20,6 +20,12 @@
 				});
 				return tabsOrder;
 			},
+			addTab: function(name){
+				return $this.data('xtab').writeTab({
+					position	: $this.find('>ul>li').length-1,
+					name		: name,
+				});
+			}
 		};
 		var tabInitiliazed;
 		var addingTab;
@@ -141,11 +147,14 @@
 					}
 				}
 				
+				var r;
 				if(config.addedTab){
-					config.addedTab(newDiv,newLi);
+					r = config.addedTab(newDiv,newLi);
 				}
 				
 				addingTab = false;
+				
+				return r;
 			},
 			addTab: function(name,tabObj,tmpTab){
 				if(!tabObj){
@@ -261,7 +270,13 @@
 			var params = [];
 			Array.prototype.push.apply(params, arguments);
 			params.shift();
-			return API[param].apply(this,params);
+			if(!API[param]&&console){
+				console.exception('xtabs call to undefined method : '+param);
+				return;
+			}
+			else{
+				return API[param].apply(this,params);
+			}
 		}
 		else{
 			config = param;
@@ -276,7 +291,8 @@
 		
 		return this.each(function(){
 			var $this = $(this);
-			$this.data('tabxconfig',config);
+			
+			$this.data('xtab',THIS);
 			
 			var ul = $this.find('>ul');
 			if(!ul.length) ul = $('<ul/>').appendTo($this);
