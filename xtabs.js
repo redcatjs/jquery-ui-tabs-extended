@@ -44,6 +44,7 @@
 					   input.hide();
 						var li = input.closest('li');
 						var data = li.data('tabx');
+						var val = input.val();
 						if(config.renameTab){
 							config.renameTab(val,data);
 						}
