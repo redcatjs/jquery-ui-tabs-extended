@@ -20,11 +20,11 @@
 				});
 				return tabsOrder;
 			},
-			addTab: function(name){
-				return $this.data('xtab').writeTab({
-					position	: $this.find('>ul>li').length-1,
-					name		: name,
-				});
+			addTab: function(name,obj){
+				if(!obj) obj = {};
+				obj.name = name;
+				obj.position = $this.find('>ul>li').length-1;
+				return $this.data('xtab').writeTab(obj);
 			}
 		};
 		var tabInitiliazed;
