@@ -198,6 +198,7 @@
 			makeTabsSortable: function(){
 				var sortableTabs = $this.find('>ul.ui-tabs-nav');
 				sortableTabs.sortable({
+					containment: 'parent',
 					items: 'li:not(.fixed)',
 					update: function(event, ui){
 						$this.trigger('xtabsorder');
