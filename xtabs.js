@@ -203,6 +203,10 @@
 						$this.trigger('xtabsorder');
 					},
 					axis: 'x',
+					start: function(e, ui){
+						ui.placeholder.css('height', 'auto');
+						ui.item.css('top', '0.2em');
+					},
 					stop: function(){
 						$this.tabs('refresh');
 					},
