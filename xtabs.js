@@ -204,6 +204,26 @@
 						$this.trigger('xtabsorder');
 					},
 					axis: 'x',
+					tolerance: 'intersect',
+					sort: function (event, ui) {
+						//bugfix tolerance intersect
+						var that = $(this),
+							w = ui.helper.outerWidth();
+						that.children().not('.fixed').each(function () {
+							if ($(this).hasClass('ui-sortable-helper') || $(this).hasClass('ui-sortable-placeholder')) 
+								return true;
+							// If overlap is more than half of the dragged item
+							var dist = Math.abs(ui.position.left - $(this).position().left),
+								before = ui.position.left > $(this).position().left;
+							if ((w - dist) > (w / 2) && (dist < w)) {
+								if (before)
+									$('.ui-sortable-placeholder', that).insertBefore($(this));
+								else
+									$('.ui-sortable-placeholder', that).insertAfter($(this));
+								return false;
+							}
+						});
+					},
 					start: function(e, ui){
 						ui.placeholder.css('height', 'auto');
 						ui.item.css('top', '0.2em');
