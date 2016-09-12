@@ -225,6 +225,7 @@
 						});
 					},
 					start: function(e, ui){
+						ui.placeholder.css('width', ui.item.width());
 						ui.placeholder.css('height', 'auto');
 						ui.item.css('top', '0.2em');
 					},
