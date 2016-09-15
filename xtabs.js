@@ -31,34 +31,35 @@
 		var addingTab;
 		var THIS = {
 			attachEventToLi: function(newLi){
+				var autoAdaptInputWidth = function(input){
+					input.attr('size',input.val().length+1);
+				};
 				newLi.on('dblclick','a',function(){
-					 $(this).hide();
-					 var input = $(this).siblings('input');
-					 input.show();
-					 input.val($(this).html());
-					 input.focus();
+					$(this).hide();
+					var input = $(this).siblings('input');
+					input.show();
+					input.val($(this).html());
+					input.focus();
+					autoAdaptInputWidth(input);
 				});
-				newLi.on('keydown','input',function(e){				
+				newLi.on('keydown','input',function(e){
 					var input = $(this);
-					switch(e.which){
-						case 13:						
-							input.hide();
-							var li = input.closest('li');
-							var data = li.data('tabx');
-							var val = input.val();
-							if(config.renameTab){
-								config.renameTab(val,data);
-							}
-							$(this).siblings('a').show().html($(this).val());
-						break;
-						case 32:
-						case 37:
-						case 38:
-						case 39:
-						case 40:
-							e.stopPropagation();
-						break;
+					if(e.which==13){
+						input.hide();
+						var li = input.closest('li');
+						var data = li.data('tabx');
+						var val = input.val();
+						if(config.renameTab){
+							config.renameTab(val,data);
+						}
+						$(this).siblings('a').show().html($(this).val());
 					}
+					else if([32,35,36,37,38,39,40].indexOf(e.which)!==-1){
+						e.stopPropagation();
+					}
+				});
+				newLi.on('input','input',function(e){
+					autoAdaptInputWidth( $(this) );
 				});
 				newLi.on('blur focusout','input',function(e){
 					var input = $(this);
