@@ -39,21 +39,26 @@
 					 input.focus();
 				});
 				newLi.on('keydown','input',function(e){				
-				   var input = $(this);
-				   if(e.which==13){
-					   input.hide();
-						var li = input.closest('li');
-						var data = li.data('tabx');
-						var val = input.val();
-						if(config.renameTab){
-							config.renameTab(val,data);
-						}
-						
-					   $(this).siblings('a').show().html($(this).val());
-				   }
-				   if(e.which==38 || e.which==40 || e.which==37 || e.which==39 || e.keyCode == 32){
-					   e.stopPropagation();
-				   }
+					var input = $(this);
+					switch(e.which){
+						case 13:						
+							input.hide();
+							var li = input.closest('li');
+							var data = li.data('tabx');
+							var val = input.val();
+							if(config.renameTab){
+								config.renameTab(val,data);
+							}
+							$(this).siblings('a').show().html($(this).val());
+						break;
+						case 32:
+						case 37:
+						case 38:
+						case 39:
+						case 40:
+							e.stopPropagation();
+						break;
+					}
 				});
 				newLi.on('blur focusout','input',function(e){
 					var input = $(this);
@@ -242,7 +247,7 @@
 			},
 			addTempTab: function(){
 				var id = 'tabs-'+(tabCounter+1);
-				var newLi = $('<li class="tab ui-state-default ui-corner-top ui-tabs-active ui-state-active"> <input class="txt" type="text">  <span class="ui-icon ui-icon-close delete-tab">Remove Tab</span></li>');
+				var newLi = $('<li class="tab ui-state-default ui-corner-top ui-tabs-active ui-state-active"> <input class="txt" type="text">	<span class="ui-icon ui-icon-close delete-tab">Remove Tab</span></li>');
 				newLi.on('input','input',function(e){
 					var input = $(this);
 					var val = input.val();
