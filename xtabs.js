@@ -4,6 +4,7 @@
 	var baseHref = window.location.href.substr(0,window.location.href.length-window.location.hash.length);
 		
 	$.fn.xtabs = function(param){
+		if(!this.length) return this;
 		var $this = this;
 		var config;
 		var API = {
