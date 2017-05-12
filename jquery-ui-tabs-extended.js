@@ -6,7 +6,7 @@
         define(["jquery","jquery-ui"], factory);
     }
     else{
-        factory(root.b);
+        factory($);
     }
 }(function($){
 
