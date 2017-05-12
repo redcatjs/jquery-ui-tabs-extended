@@ -1,6 +1,6 @@
 {
   "name": "jquery-ui-tabs-extended",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "jquery-ui tabs extended with add, delete, droppable and others additionals features",
   "main": "jquery-ui-tabs-extended.js",
   "scripts": {
