@@ -1,0 +1,26 @@
+{
+  "name": "xtabs",
+  "version": "1.0.0",
+  "description": "jquery-ui tabs extended with add, delete, droppable and others additionals features",
+  "main": "xtabs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redcatjs/xtabs.git"
+  },
+  "keywords": [
+    "jquery-ui",
+    "tabs"
+  ],
+  "author": "Jo <jo@redcat.ninja> (https://redcat.ninja)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redcatjs/xtabs/issues"
+  },
+  "homepage": "https://github.com/redcatjs/xtabs#readme",
+  "dependencies": {
+    "jquery-ui": "^1.12.1"
+  }
+}
