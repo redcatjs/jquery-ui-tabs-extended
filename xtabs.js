@@ -1,4 +1,15 @@
-(function($){	
+(function(factory){
+	if(typeof module === "object" && typeof module.exports === "object"){
+		module.exports = factory( require('jquery'), require('jquery-ui') );
+	}
+    else if(typeof define === 'function' && define.amd){
+        define(["jquery","jquery-ui"], factory);
+    }
+    else{
+        factory(root.b);
+    }
+}(function($){
+
 	var tabCounter = 0;
 	var tabTemplate = '<li class="tab"> <input class="txt" type="text"> <a href="#{href}">#{title}</a> <span class="ui-icon ui-icon-close delete-tab">Remove Tab</span></li>';
 	var baseHref = window.location.href.substr(0,window.location.href.length-window.location.hash.length);
@@ -360,4 +371,5 @@
 			
 		});
 	};
-})(jQuery);
+	
+}));
